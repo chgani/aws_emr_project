@@ -1,6 +1,8 @@
+# force_destroy to true is optional (by defaults it is true) ,if we want delete the bucket as well after running terraform destroy command
 # Input bucket for raw/source data
 resource "aws_s3_bucket" "input_bucket" {
   bucket = var.input_bucket_name
+  force_destroy = true
 
   tags = {
     Name        = "Input data bucket"
@@ -11,7 +13,7 @@ resource "aws_s3_bucket" "input_bucket" {
 # Output bucket for processed results
 resource "aws_s3_bucket" "output_bucket" {
   bucket = var.output_bucket_name
-
+  force_destroy = true
   tags = {
     Name        = "Output data bucket"
     Environment = var.environment
@@ -21,6 +23,7 @@ resource "aws_s3_bucket" "output_bucket" {
 # bucket to save script for processing spark job
 resource "aws_s3_bucket" "scripts_bucket" {
   bucket = var.scripts_bucket_name
+  force_destroy = true 
 
   tags = {
     Name        = "Scripts bucket"
